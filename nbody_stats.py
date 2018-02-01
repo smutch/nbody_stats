@@ -20,8 +20,8 @@ def cli():
 @cli.command()
 @click.argument('npart', type=click.INT)
 @click.argument('side_length', type=click.FLOAT)
-@click.option('--ncubed', is_flag=True, help='Cube the number of particles.')
-def mass(npart, side_length, ncubed=False):
+@click.option('--ncubed/--no-ncubed', default=True, help='Cube the number of particles.')
+def mass(npart, side_length, ncubed=True):
     """Calculate the particle mass given the number of particles and
     box side length (in h^-1 Mpc)."""
 
@@ -58,7 +58,7 @@ def npart(mass, side_length, ncubed=True):
 @cli.command()
 @click.argument('npart', type=click.INT)
 @click.argument('mass', type=click.FLOAT)
-@click.option('--ncubed', is_flag=True, help='Cube the number of particles.')
+@click.option('--ncubed/--no-ncubed', default=True, help='Cube the number of particles.')
 def volume(npart, mass, ncubed=True):
     """Calculate the simulation volume (in h^-1 Mpc) given the particle number and mass (in h^-1 Msol)."""
 
