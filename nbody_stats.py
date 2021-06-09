@@ -29,7 +29,7 @@ def mass(npart, side_length, ncubed=True):
         npart = npart**3
 
     volume = (side_length * U.Mpc)**3
-    total_mass = volume * cosmo.critical_density0 / cosmo.h / cosmo.h
+    total_mass = volume * cosmo.critical_density0 * cosmo.Om0 / cosmo.h / cosmo.h
     mp = total_mass / float(npart)
 
     print(f'{mp.to(U.Msun).value:.3e}/h Msol')
@@ -46,7 +46,7 @@ def npart(mass, side_length, ncubed=True):
     mass = mass * U.Msun
 
     volume = (side_length * U.Mpc)**3
-    total_mass = volume * cosmo.critical_density0 / cosmo.h / cosmo.h
+    total_mass = volume * cosmo.critical_density0 * cosmo.Om0 / cosmo.h / cosmo.h
     npart = (total_mass / mass).decompose()
 
     if ncubed:
@@ -67,7 +67,7 @@ def volume(npart, mass, ncubed=True):
 
     mass = mass * U.Msun
     total_mass = mass * npart
-    req_density = cosmo.critical_density0 / cosmo.h / cosmo.h
+    req_density = cosmo.critical_density0 * cosmo.Om0 / cosmo.h / cosmo.h
 
     volume = (total_mass / req_density)
     side_length = np.cbrt(volume).to('Mpc').value
